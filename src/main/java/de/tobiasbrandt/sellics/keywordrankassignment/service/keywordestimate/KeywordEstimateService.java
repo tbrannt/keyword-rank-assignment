@@ -64,7 +64,7 @@ public class KeywordEstimateService {
 	private Integer getScoreForSubRequests(List<String> initialSuggestions, String keyword, String correctedPrefix)
 			throws InterruptedException {
 		List<Callable<Integer>> getScoreTasks = new ArrayList<>();
-		for (int i = 0; i < initialSuggestions.size(); i++) {
+		for (int i = 0; i < Math.min(initialSuggestions.size(), MAX_REQUESTS); i++) {
 			String suggestion = initialSuggestions.get(i);
 
 			Callable<Integer> scoreTask = () -> {
